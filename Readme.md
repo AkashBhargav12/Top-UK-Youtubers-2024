@@ -167,4 +167,83 @@ The cleaned data should meet the following criteria and constraints:
 - All data types should be appropriate for the contents of each column.
 - No column should contain null values, indicating complete data for all records.
 
+Below is a table outlining the constraints on our cleaned dataset:
+
+| Property | Description |
+| --- | --- |
+| Number of Rows | 100 |
+| Number of Columns | 4 |
+
+And here is a tabular representation of the expected schema for the clean data:
+
+| Column Name | Data Type | Nullable |
+| --- | --- | --- |
+| channel_name | VARCHAR | NO |
+| total_subscribers | INTEGER | NO |
+| total_views | INTEGER | NO |
+| total_videos | INTEGER | NO |
+
+
+
+- What steps are needed to clean and shape the data into the desired format?
+
+1. Remove unnecessary columns by only selecting the ones you need
+2. Extract Youtube channel names from the first column
+3. Rename columns using aliases
+
+
+
+### Transform the data
+
+
+
+```sql
+/* 
+Data Cleaning Steps
+1. Remove Unnecessary columns by only selecting the ones we need.
+2. Extract the Youtube channel names from the first column.
+3. Rename the column names.
+*/
+
+SELECT 
+    NOMBRE, total_subscribers, total_videos, total_views
+FROM
+    top_uk_youtubers_2024;
+
+SELECT 
+    SUBSTRING(Nombre,
+            1,
+            LOCATE('@', Nombre) - 1)
+            AS Channel_Name, total_subscribers, total_views, total_videos
+FROM
+    top_uk_youtubers_2024
+```
+
+
+### Create the SQL view
+
+```sql
+/*
+# 1. Create a view to store the transformed data
+# 2. Cast the extracted channel name as VARCHAR(100)
+# 3. Select the required columns from the top_uk_youtubers_2024 SQL table 
+*/
+
+-- 1.
+CREATE VIEW view_uk_youtubers_2024 AS
+
+-- 2.
+SELECT
+   CAST(SUBSTRING(Nombre,
+            1,
+            LOCATE('@', Nombre) - 1)
+        AS CHAR (100)) AS Channel_Name, total_subscribers, total_views, total_videos
+
+-- 3.
+FROM
+    top_uk_youtubers_2024
+```
+
+# Testing
+
 
