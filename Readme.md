@@ -318,7 +318,7 @@ HAVING COUNT(*) > 1
 
 - What does the dashboard look like?
 
-[PowerBi Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection)
+[PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection)
 
 This is an interactive dashboard shwoing the Top Uk Youtubers in 2024 so far
 
@@ -472,4 +472,145 @@ Here are the key questions we need to answer for our marketing client:
 
 
 ## Notes
+
+For this analysis, we prioritize analysing the metrics that are important in generating the expected ROI for our marketing client, which are the YouTube channels wuth the most 
+
+- subscribers
+- total views
+- videos uploaded
+
+
+## Validation 
+
+### 1. Youtubers with the most subscribers 
+
+#### Calculation breakdown
+
+Campaign idea = product placement 
+
+1. NoCopyrightSounds 
+- Average views per video = 6.92 million
+- Product cost = $5
+- Potential units sold per video = 6.92 million x 2% conversion rate = 138,400 units sold
+- Potential revenue per video = 138,400 x $5 = $692,000
+- Campaign cost (one-time fee) = $50,000
+- **Net profit = $692,000 - $50,000 = $642,000**
+
+b. DanTDM
+
+- Average views per video = 5.34 million
+- Product cost = $5
+- Potential units sold per video = 5.34 million x 2% conversion rate = 106,800 units sold
+- Potential revenue per video = 106,800 x $5 = $534,000
+- Campaign cost (one-time fee) = $50,000
+- **Net profit = $534,000 - $50,000 = $484,000**
+
+c. Dan Rhodes
+
+- Average views per video = 11.15 million
+- Product cost = $5
+- Potential units sold per video = 11.15 million x 2% conversion rate = 223,000 units sold
+- Potential revenue per video = 223,000 x $5 = $1,115,000
+- Campaign cost (one-time fee) = $50,000
+- **Net profit = $1,115,000 - $50,000 = $1,065,000**
+
+
+Best option from category: Dan Rhodes
+
+
+#### SQL Query
+
+```sql
+/*
+
+1. Define the Variables
+2. Create the CTE that rounds the average views per video
+3. Select the columns that are required for the analysis
+4. Filter the results by Youtube channels with the highest subscriber bases
+5. Order by net profits (From highest to lowest)
+
+*/
+
+-- 1. 
+Set @conversionrate = 0.02; 			-- Conversion rate at 2%
+Set @productcost = 5.0; 				-- Product cost at $5.0
+Set @campaigncost = 50000;				-- The Campaign Cost at $50000
+
+-- 2. 
+WITH channeldata AS (
+Select 
+channel_name,
+total_views,
+total_videos,
+round(cast(total_views as float ) / total_videos , -4) as rounded_avg_views_per_video
+from 
+view_uk_youtubers_2024)
+
+
+-- 3.
+Select
+channel_name,
+rounded_avg_views_per_video,
+(rounded_avg_views_per_video * @conversionrate) as potential_units_sold_per_video,
+(rounded_avg_views_per_video * @conversionrate * @productcost) as potential_revenue_per_video,
+(rounded_avg_views_per_video * @conversionrate * @productcost) - @campaigncost as net_profit
+from channeldata
+
+-- 4.
+Where trim(Channel_Name) in ('NoCopyrightSounds', 'DanTDM', 'Dan Rhodes')
+
+-- 5.
+order by
+net_profit desc
+```
+
+#### Output
+
+![Most Subscribers](Assets/Images/SQL Analysis.png)
+
+
+
+## Discovery
+
+We discovered that 
+
+1. NoCopyrightSOunds, Dan Rhodes and DanTDM are the channnels with the most subscribers in the UK
+2. GRM Daily, Man City and Yogscast are the channels with the most videos uploaded
+3. DanTDM, Dan RHodes and Mister Max are the channels with the most views
+4. Entertainment channels are useful for broader reach, as the channels posting consistently on their platforms and generating the most engagement are focus on entertainment and music 
+
+
+
+
+## Recommendations 
+  
+1. Dan Rhodes is the best YouTube channel to collaborate with if we want to maximize visbility because this channel has the most YouTube subscribers in the UK
+2. 2. Although GRM Daily, Man City and Yogcasts are regular publishers on YouTube, it may be worth considering whether collaborating with them with the current budget caps are worth the effort, as the potential return on investments is significantly lower compared to the other channels.
+3. Mister Max is the best YouTuber to collaborate with if we're interested in maximizing reach, but collaborating with DanTDM and Dan Rhodes may be better long-term options considering the fact that they both have large subscriber bases and are averaging significantly high number of views.
+4. The top 3 channels to form collaborations with are NoCopyrightSounds, DanTDM and Dan Rhodes based on this analysis, because they attract the most engagement on their channels consistently.
+
+
+### Potential ROI 
+
+1. Setting up a collaboration deal with Dan Rhodes would make the client a net profit of $1,065,000 per video
+2. An influencer marketing contract with Mister Max can see the client generate a net profit of $1,276,000
+3. If we go with a product placement campaign with DanTDM, this could  generate the client approximately $484,000 per video. If we advance with an influencer marketing campaign deal instead, this would make the client a one-off net profit of $404,000.
+4. NoCopyrightSounds could profit the client $642,000 per video too (which is worth considering) 
+
+
+
+
+### Action plan
+
+Based on our analysis, we beieve the best channel to advance a long-term partnership deal with to promote the client's products is the Dan Rhodes channel. 
+
+We'll have conversations with the marketing client to forecast what they also expect from this collaboration. Once we observe we're hitting the expected milestones, we'll advance with potential partnerships with DanTDM, Mister Max and NoCopyrightSounds channels in the future.   
+
+- Steps to implement the recommended decisions effectively
+
+
+1. Reach out to the teams behind each of these channels, starting with Dan Rhodes
+2. Negotiate contracts within the budgets allocated to each marketing campaign
+3. Kick off the campaigns and track each of their performances against the KPIs
+4. Review how the campaigns have gone, gather insights and optimize based on feedback from converted customers and each channel's audiences
 
