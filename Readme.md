@@ -318,7 +318,7 @@ HAVING COUNT(*) > 1
 
 - What does the dashboard look like?
 
-![PowerBi Dashboard](<iframe title="Top UK Youtubers 2024" width="1024" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>)
+![PowerBi Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection)
 
 This is an interactive dashboard shwoing the Top Uk Youtubers in 2024 so far
 
