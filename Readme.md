@@ -246,4 +246,78 @@ FROM
 
 # Testing
 
+Here are the data quaity tests conducted
 
+## Row Count check
+```sql
+/*
+Data Quality Tests
+
+1. The data needs to be 100 records of youtube channels (row count check). --- (passed)
+*/
+
+SELECT
+    COUNT(*) AS no_of_rows
+FROM
+    view_uk_youtubers_2024;
+
+```
+
+## Column Count check
+```sql
+/*
+Data Quality Tests
+
+2. The data needs 4 fields (column count test). --- (passed)
+*/
+
+SELECT 
+    COUNT(*) AS coulmns_count
+FROM
+    Information_Schema.Columns
+WHERE
+    table_name = 'view_uk_youtubers_2024';
+```
+
+## Data Type check
+```sql
+/*
+Data Quality Tests
+
+3. Channel name column must be string format and the other columns must be numerical data types (data type check). --(passed)
+*/
+
+SELECT 
+    Column_name, Data_type
+FROM
+    Information_Schema.Columns
+WHERE
+    table_name = 'view_uk_youtubers_2024';
+```
+
+## Duplicate Count check
+```sql
+/*
+Data Quality Tests
+
+4. Each record must be unique in the dataset (duplicate count check). -- (passed)
+*/
+
+SELECT 
+    channel_name, COUNT(*) AS duplicate
+FROM
+    view_uk_youtubers_2024
+GROUP BY channel_name
+HAVING COUNT(*) > 1
+```
+
+
+# Visualisation
+
+## Results
+
+- What does the dashboard look like?
+
+![PowerBi Dashboard](<iframe title="Top UK Youtubers 2024" width="1024" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>)
+
+  
