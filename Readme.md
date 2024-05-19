@@ -318,6 +318,8 @@ HAVING COUNT(*) > 1
 
 - What does the dashboard look like?
 
+![Power BI Visualisation](Assets/Images/Top_UK_Youtubers_2024.png)
+
 [PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection)
 
 This is an interactive dashboard shwoing the Top Uk Youtubers in 2024 so far
