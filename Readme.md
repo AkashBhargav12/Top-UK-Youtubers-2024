@@ -340,7 +340,7 @@ HAVING COUNT(*) > 1
 
 ![Power BI Visualisation](Assets/Images/Top_UK_Youtubers_2024.png)
 
-[PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNDA0NGJjZTItYzY4My00ZTMzLWJmM2UtNmYwYWE5MTNhZmQxIiwidCI6ImI1MWY0MTY0LTE1M2ItNDhlYi05MWMyLTZiYzVmYTgxNmI0NiJ9&pageName=ReportSection)
+[PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNTkxZmNiMWMtMTMzZi00YTI5LTg5MDAtMDRkMzlmNDdjMDg0IiwidCI6IjhkMWQzMjI3LWRhMjAtNGQ5ZS1iMGE1LTZiNWU4MzAzZDI4YyJ9)
 
 This is an interactive dashboard showing the Top Uk Youtubers in 2024 so far
 
